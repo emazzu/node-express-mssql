@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html>
+
+
+
+<head>
+
+  
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap 101 Template</title>
+
+
+
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css"/>
+
+
+
+    <!-- Optional theme -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+    <!--
+
+    <script src="angular_1_controllers.js"></script>
+
+    -->
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+
+
+
+
+
+    <style type="text/css">
+
+        #bootstrapSelectForm .selectContainer .form-control-feedback {
+
+            /* Adjust feedback icon position */
+
+            right: -15px;
+
+        }
+
+    </style>
+
+
+
+
+
+</head>
+
+
+
+<body ng-app>
+
+
+
+
+
+<div class="container-fluid">
+
+	<h3>Angular con 2 Controller</h3>
+
+</div>
+
+
+
+
+
+<div class="panel panel-primary">
+
+    <div class="panel-heading">GET JSON from Azure: emazzu-sql-2012.cloudapp.net
+
+    </div>
+
+    <div class="panel-body">
+
+     <div ng-controller="jsonController">
+
+    <div class="form-group">
+
+        <div class="col-sm-5 selectContainer">
+
+            <select name="region_selector" class="form-control" ng-model="select_region" ng-change="load_countries()">
+
+                <option value="100">100</option>
+
+                <option value="500">500</option>
+
+                <option value="5000">5000</option>
+
+                <option value="10000">10000</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    </br>
+
+    {{url}}
+
+    <hr>
+
+
+
+      <div ng-repeat="ele in country_list">
+
+        <div class="row">
+
+          <div class="col-lg-2 col-xs-12 col-sm-12">
+              Id: {{ele.Idwell}}
+          </div>
+
+          <div class="col-lg-2 col-xs-12 col-sm-12">
+              Well Name: {{ele.WellName}}
+          </div>
+
+          <div class="col-lg-2 col-xs-12 col-sm-12">
+              Area: {{ele.Area}}
+          </div>
+
+          <div class="col-lg-6 col-xs-12 col-sm-12">
+              Operator: {{ele.Operator}}
+          </div>
+
+        </div> 
+
+          <hr>
+
+      </div> 
+
+
+
+     </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+  <script>
+
+
+
+      var firstController = function ($scope)
+
+      {
+
+        // Initialize the model variables
+
+        $scope.firstName = "Edu";
+
+        $scope.lastName = "Mazzu";
+
+
+
+        // Define utility functions
+
+        $scope.getFullName = function ()
+
+        {
+
+          return $scope.firstName + " " + $scope.lastName;
+
+        };
+
+      };
+
+
+
+      var secondController = function ($scope)
+
+      {
+
+        // Initialize the model variables
+
+        $scope.firstName = "Vivi";
+
+        $scope.middleName = "Marina";
+
+        $scope.lastName = "Garcia";
+
+
+
+        // Define utility functions
+
+        $scope.getFullName = function ()
+
+        {
+
+          return $scope.firstName + " " + $scope.middleName + " " + $scope.lastName;
+
+        };
+
+      };
+
+
+
+      var jsonController = function ($scope, $http)
+
+      {
+
+
+        var urlCountries = "http://localhost:3000/wells/500";
+
+        //var urlCountries = "http://www.json-generator.com/api/json/get/ceeySrhUvC";
+
+        $scope.load_countries = function () {
+
+          $scope.url = urlCountries;
+
+
+          $http.get(urlCountries)
+
+          //$http.get(urlCountries)          
+
+          .success(function (countryList) {
+
+              $scope.country_list = countryList;
+
+          })
+
+        };
+
+      };
+
+
+
+//http://www.json-generator.com/api/json/get/ceeySrhUvC?indent=2
+
+
+
+  </script>
+
+
+
+</body>
+
+
+
+</html>
+
